@@ -9,7 +9,7 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-  serviceProvider = false;
+  serviceProvider: boolean = false;
   username: string;
   password: string;
 
@@ -17,11 +17,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    const loginPayload = JSON.stringify({
+      "username": this.username,
+      "password": this.password
+    })
+
     if (this.serviceProvider) {
-      
+      // chama serviço de login como prestador passando loginPayload  
     }
     else {
-
+      // chama serviço de login como consumidor passando loginPayload
     }
   }
 
