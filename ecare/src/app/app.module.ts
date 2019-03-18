@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 
 
 @NgModule({
