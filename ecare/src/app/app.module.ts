@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './pages/auth/login/login.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
 
@@ -36,7 +38,9 @@ import { LoginComponent } from './pages/auth/login/login.component';
 
     FormsModule,
 
-    AppRoutingModule
+    AppRoutingModule,
+    
+    HttpClientModule
 
   ],
 

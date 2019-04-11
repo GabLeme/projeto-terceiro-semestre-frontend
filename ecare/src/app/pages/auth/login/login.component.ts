@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthConsumerService } from '../services/auth-consumer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _AuthConsumer: AuthConsumerService, private _Router: Router) { }
 
   serviceProvider: boolean = false;
   username: string;
   password: string;
+  errorMessage: string;
 
   ngOnInit() {
   }
@@ -26,7 +29,14 @@ export class LoginComponent implements OnInit {
       // chama serviço de login como prestador passando loginPayload  
     }
     else {
-      // chama serviço de login como consumidor passando loginPayload
+      this._AuthConsumer.doLogin(loginPayload).subscribe(r => {
+        if (loginPayload['username'] === r['username'] && loginPayload['password'] === r['password']) {
+          window.localStorage.setItem('loggedUser', JSON.stringify({ r }))
+          
+        }
+        else
+          this.errorMessage = "Usuário ou senha inválidos.";
+      })
     }
   }
 
