@@ -1,5 +1,3 @@
-@import './reset.scss';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body {
     font-family: arial;
   }
@@ -53,8 +51,3 @@ body {
     color: white;
   }
   
-  h1 {
-    margin-bottom: 1em;
-    font-size: 1.3em;
-    font-weight: bold;
-  }
