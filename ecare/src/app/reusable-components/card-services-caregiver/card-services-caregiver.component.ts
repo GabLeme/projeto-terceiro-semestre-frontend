@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServicesCaregiverService } from './../services/services-caregiver.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-services-caregiver',
@@ -10,14 +11,14 @@ export class CardServicesCaregiverComponent implements OnInit, OnDestroy {
 
   constructor(private _ServicesCaregiverService: ServicesCaregiverService) { }
 
-  caregiverServices: any;
+  caregiverServices: Subscription;
 
   ngOnInit() {
-    this.getCaregiverServices(this.caregiverServices);
+    this.getCaregiverServices();
   }
 
-  getCaregiverServices(variable): void {
-    this._ServicesCaregiverService.getCaregiverServices().subscribe(r => variable = r);
+  getCaregiverServices(): void {
+    this._ServicesCaregiverService.getCaregiverServices().subscribe(r => this.caregiverServices = r);
   }
 
   ngOnDestroy() {
