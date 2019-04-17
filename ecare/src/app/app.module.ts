@@ -15,6 +15,7 @@ import { MaterialModule } from './core/material-module';
 import { CardServicesCaregiverComponent } from './reusable-components/card-services-caregiver/card-services-caregiver.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
 
@@ -53,7 +54,9 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 
     MaterialModule,
 
-    HttpClientModule
+    HttpClientModule,
+
+    BarRatingModule
 
   ],
 

@@ -5,6 +5,19 @@
   align-items: stretch;
 }
 
+.matButton {
+  color: white;
+  background: black;
+}
+
+.mat-card-actions{
+  text-align: center;
+}
+
+.ratingSystem {
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .cards {
     display: block;

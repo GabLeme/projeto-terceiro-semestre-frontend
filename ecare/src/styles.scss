@@ -1,5 +1,6 @@
 @import "./reset.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ngx-bar-rating/themes/br-default-theme';
 body {
   font-family: arial;
 }
@@ -46,4 +47,3 @@ footer {
   background-color: #690;
   color: white;
 }
-
