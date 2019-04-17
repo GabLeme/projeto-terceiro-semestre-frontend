@@ -12,7 +12,7 @@ export class ServicesCaregiverService {
 
   private endopointApiLocalHost = environment.endpointLocal;
 
-  findAll() {
+  findAll(): Observable<any> {
     return this._HttpClient.get(`${this.endopointApiLocalHost}/caregiverServices/`);
   }
 
