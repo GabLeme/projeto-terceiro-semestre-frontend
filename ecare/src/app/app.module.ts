@@ -13,7 +13,8 @@ import { NavigationMenuSecundaryComponent } from './reusable-components/navigati
 import { HomeServicesComponent } from './pages/principal/home-services/home-services.component';
 import { MaterialModule } from './core/material-module';
 import { CardServicesCaregiverComponent } from './reusable-components/card-services-caregiver/card-services-caregiver.component';
-
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
 
@@ -47,6 +48,8 @@ import { CardServicesCaregiverComponent } from './reusable-components/card-servi
     FormsModule,
 
     AppRoutingModule,
+
+    LoadingBarHttpClientModule,
 
     MaterialModule,
 

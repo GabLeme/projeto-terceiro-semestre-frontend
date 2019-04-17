@@ -18,7 +18,7 @@ export class CardServicesCaregiverComponent implements OnInit, OnDestroy {
   }
 
   getCaregiverServices(): void {
-    this._ServicesCaregiverService.getCaregiverServices().subscribe(r => this.caregiverServices = r);
+    this._ServicesCaregiverService.findAll().subscribe(r => this.caregiverServices = r);
   }
 
   ngOnDestroy() {
