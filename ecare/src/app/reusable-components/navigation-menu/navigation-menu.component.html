@@ -1,5 +1,20 @@
 <nav>
     <mat-toolbar color="primary">
-        <span>Filtros</span>
+        <mat-slider
+        class="example-margin"
+        [disabled]="disabled"
+        [invert]="invert"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [thumbLabel]="thumbLabel"
+        [tickInterval]="tickInterval"
+        [(ngModel)]="value"
+        [vertical]="vertical">
+    </mat-slider>
+
+        <span>max: {{value | currency:'R$'}}</span>
+
+        <button mat-button>Filtrar</button>
       </mat-toolbar>
 </nav>

@@ -12,10 +12,13 @@ import { FooterComponent } from './reusable-components/footer/footer.component';
 import { NavigationMenuSecundaryComponent } from './reusable-components/navigation-menu-secundary/navigation-menu-secundary.component';
 import { HomeServicesComponent } from './pages/principal/home-services/home-services.component';
 import { MaterialModule } from './core/material-module';
-import { CardServicesCaregiverComponent } from './reusable-components/card-services-caregiver/card-services-caregiver.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { BarRatingModule } from "ngx-bar-rating";
+import { CardServicesComponent } from './reusable-components/card-services/card-services.component';
+import { RegisterServiceComponent } from './pages/provider/register-service/register-service.component';
+import { ProviderProfileComponent } from './pages/provider/provider-profile/provider-profile.component';
+import { ConsumerProfileComponent } from './pages/consumer/consumer-profile/consumer-profile.component';
 
 @NgModule({
 
@@ -35,7 +38,13 @@ import { BarRatingModule } from "ngx-bar-rating";
 
     HomeServicesComponent,
 
-    CardServicesCaregiverComponent,
+    CardServicesComponent,
+
+    RegisterServiceComponent,
+
+    ProviderProfileComponent,
+
+    ConsumerProfileComponent,
 
 
   ],
