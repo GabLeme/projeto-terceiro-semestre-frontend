@@ -23,6 +23,7 @@
     "@angular/router": "~7.2.0",
     "@ngx-loading-bar/core": "^4.2.0",
     "@ngx-loading-bar/http-client": "^4.2.0",
+    "angular-bootstrap-md": "^7.5.1",
     "core-js": "^2.5.4",
     "ngx-bar-rating": "^1.1.0",
     "rxjs": "~6.3.3",
