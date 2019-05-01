@@ -1,0 +1,27 @@
+<section class="team-section text-center my-5">
+  <div class="cards">
+    <mdb-card *ngFor="let s of services"> 
+      <mdb-card-body>
+        <mdb-card-title>
+          <h4>  <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon>{{s.providerName}}</h4>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text>
+          {{s.description}}
+        </mdb-card-text>
+        <mdb-card-text>
+            Data de anuncio: {{s.announcementDate}}
+          </mdb-card-text>
+        <!-- <p class="card-text"></p> -->
+        <hr>
+        <mdb-icon fas icon="envelope" class="d-inline p-2" [mdbTooltip]="s.providerEmail"></mdb-icon>
+        <mdb-icon fas icon="phone" class="d-inline p-2" [mdbTooltip]="s.providerCellphone"></mdb-icon>
+        <hr>
+       <mdb-card-text><mdb-icon fas icon="money-bill-alt"></mdb-icon> {{s.value | currency:'R$'}}</mdb-card-text> 
+       <p></p>
+       <button *ngIf="s.value != 0.00" mdbBtn type="button" color="primary" rounded="true" mdbWavesEffect>Prosseguir</button>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</section>

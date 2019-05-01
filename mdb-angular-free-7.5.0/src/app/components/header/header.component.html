@@ -1,0 +1,37 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark  cyan darken-1" [containerInside]="false">
+
+  <mdb-navbar-brand><a class="navbar-brand" href="#"><strong>eCare</strong></a> <span>|</span></mdb-navbar-brand>
+
+  <links>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/home/services/cuidador" mdbWavesEffect>Cuidadores<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/home/services/acompanhador" mdbWavesEffect>Acompanhadores<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/home/services/outros" mdbWavesEffect>Outros serviços<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" href="#">Minha conta</a>
+              <a class="dropdown-item" href="#">Configurações</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Sair</a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
+
+</mdb-navbar>
