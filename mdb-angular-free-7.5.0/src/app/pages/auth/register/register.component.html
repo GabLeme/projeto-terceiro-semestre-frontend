@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="login">
+    <!-- Default form register -->
+    <form class="text-center border border-light p-5">
+
+      <p class="h4 mb-4">eCare</p>
+      <p style="font-size: 14px; font-style: bold;"><strong>Plataforma de serviços a idosos.</strong></p>
+
+      <br>
+
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4" *ngIf="provider">
+        Estamos felizes em tê-lo trabalhando conosco!
+      </small>
+
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4" *ngIf="!provider">
+        Estamos felizes que você tenha gostado de nossos serviços!
+      </small>
+
+      <div class="form-row mb-4">
+        <div class="col">
+          <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Primeiro nome" [formControl]="firstName">
+        </div>
+        <div class="col">
+          <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Ultimo nome" [formControl]="lastName">
+        </div>
+      </div>
+
+      <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" [formControl]="email">
+
+      <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Senha" [formControl]="password"
+        aria-describedby="defaultRegisterFormPasswordHelpBlock">
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-danger"
+        style="font-size: 10px">
+        Por favor, utilize uma senha que contenha mais de 8 caracteres.
+      </small>
+
+      <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Número para contato"
+        aria-describedby="defaultRegisterFormPhoneHelpBlock" *ngIf="provider" [formControl]="cellPhone">
+
+      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-success"
+        style="font-size: 10px" *ngIf="successMessage">
+        {{successMessage}}
+      </small>
+
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="register()">Cadastrar</button>
+      <p class="text-left"><a routerLink="/">
+          <mdb-icon fas icon="angle-double-left"></mdb-icon> Voltar
+        </a></p>
+
+    </form>
+  </div>
+</div>
