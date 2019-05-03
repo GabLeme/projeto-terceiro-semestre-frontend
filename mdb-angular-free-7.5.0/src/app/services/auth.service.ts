@@ -33,6 +33,9 @@ export class AuthService {
     saveConsumer(payload: any) {
         return this._HttpClient.post(`${this.endopointApiLocalHost}/consumers/`, payload, this.httpOptions);
     }
+    Exists(payload: any) {
+    return this._HttpClient.get(`${this.endopointApiLocalHost}/consumers/`);
+    }
 
     saveProvider(payload: any) {
         return this._HttpClient.post(`${this.endopointApiLocalHost}/providers/`, payload, this.httpOptions);

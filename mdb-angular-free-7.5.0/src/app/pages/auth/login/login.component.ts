@@ -17,25 +17,32 @@ export class LoginComponent implements OnInit {
   email = new FormControl('');
   password = new FormControl('');
   errorMessage: String;
-
+  showSpinner: boolean = false;
   ngOnInit() {
     localStorage.clear();
+
   }
 
   authentication() {
+    this.showSpinner = true;
     if (!this.isProvider) {
       this._AuthService.makeLoginOfConsumer(this.email.value, this.password.value).subscribe(r => {
+
         if (r != null) {
+          console.log(r);
           localStorage.setItem('loggedUser', JSON.stringify(r));
           localStorage.setItem('typeUser', "consumer");
           this._Router.navigate(['/home/services/cuidador'])
         }
-        else
+        else {
           this.errorMessage = "Usuario ou senha inválidos.";
+          console.log(r);
+        }
       })
     }
     else {
       this._AuthService.makeLoginOfProvider(this.email.value, this.password.value).subscribe(r => {
+        this.showSpinner = true;
         if (r != null) {
           localStorage.setItem('loggedUser', JSON.stringify(r));
           localStorage.setItem('typeUser', "provider");
@@ -45,7 +52,9 @@ export class LoginComponent implements OnInit {
           this.errorMessage = "Usuario ou senha inválidos.";
       })
     }
+
   }
+
 
 
   checkIfIsProvider(event): void {

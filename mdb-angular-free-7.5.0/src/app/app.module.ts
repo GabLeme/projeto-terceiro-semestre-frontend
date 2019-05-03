@@ -12,8 +12,7 @@ import { ServicesPageComponent } from './pages/consumer/services-page/services-p
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-
+import { loadingspinnercomponent } from './pages/loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +22,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     ServicesPageComponent,
     LoginComponent,
     RegisterComponent,
-    UserProfileComponent,
+    loadingspinnercomponent,
   ],
   imports: [
     BrowserModule,
