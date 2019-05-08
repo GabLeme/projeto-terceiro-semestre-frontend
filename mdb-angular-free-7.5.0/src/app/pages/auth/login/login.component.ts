@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   showSpinner: boolean = false;
   ngOnInit() {
     localStorage.clear();
-
   }
 
   authentication() {
@@ -35,6 +34,7 @@ export class LoginComponent implements OnInit {
           this._Router.navigate(['/home/services/cuidador'])
         }
         else {
+          this.showSpinner = false;
           this.errorMessage = "Usuario ou senha inválidos.";
           console.log(r);
         }
@@ -48,8 +48,10 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('typeUser', "provider");
           this._Router.navigate(['/home/services/cuidador'])
         }
-        else
+        else {
+          this.showSpinner = false;
           this.errorMessage = "Usuario ou senha inválidos.";
+        }
       })
     }
 
@@ -58,8 +60,9 @@ export class LoginComponent implements OnInit {
 
 
   checkIfIsProvider(event): void {
-    if (event.checked == true) {
+    if (event.checked) {
       this.isProvider = true;
+      console.log('c,iquei')
     }
   }
 

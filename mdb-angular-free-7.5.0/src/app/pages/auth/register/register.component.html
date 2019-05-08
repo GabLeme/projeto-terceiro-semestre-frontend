@@ -38,8 +38,8 @@
         aria-describedby="defaultRegisterFormPhoneHelpBlock" *ngIf="provider" [formControl]="cellPhone">
 
       <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-success"
-        style="font-size: 10px" *ngIf="successMessage">
-        {{successMessage}}
+        style="font-size: 10px" *ngIf="message">
+        {{message}}
       </small>
 
       <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="register()">Cadastrar</button>

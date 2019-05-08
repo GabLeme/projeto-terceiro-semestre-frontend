@@ -20,7 +20,11 @@ export class ServicesService {
     return this._HttpClient.get(`${this.endopointApiLocalHost}/services/${id}`);
   }
 
-  findByCategory(category: string): Observable<any>{
-    return this._HttpClient.get(`${this.endopointApiLocalHost}/services?category=${category}`);    
+  findByCategory(category: string): Observable<any> {
+    return this._HttpClient.get(`${this.endopointApiLocalHost}/services?category=${category}`);
+  }
+
+  filterByValue(value: number, category: string) {
+    return this._HttpClient.get(`${this.endopointApiLocalHost}/services/filter?value=${value}&category=${category}`);
   }
 }

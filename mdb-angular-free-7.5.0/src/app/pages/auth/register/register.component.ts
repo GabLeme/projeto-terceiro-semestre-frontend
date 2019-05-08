@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { isBoolean } from 'util';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,11 +11,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private _ActivatedRoute: ActivatedRoute, private _AuthService: AuthService, private _Router: Router ) { }
+  constructor(private _ActivatedRoute: ActivatedRoute, private _AuthService: AuthService, private _Router: Router) { }
 
   provider: boolean;
   consumer: boolean;
-  successMessage: String;
+  message: String;
 
   //Forms
   firstName = new FormControl('');
@@ -26,7 +27,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.verifyTypeOfRegister();
-
   }
 
   verifyTypeOfRegister() {
@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
         this.provider = true;
       else
         this.consumer = true;
-
     });
   }
 
@@ -48,35 +47,19 @@ export class RegisterComponent implements OnInit {
     this.cellPhone.setValue('');
   }
 
-  Validation(){
-    if (this.firstName.value === '' ||
-      this.email.value === '' ||
-      this.lastName.value === '' ||
-      this.email.value === '' || this.password.value === '' ||
-      (this.password.value + '').length < 8) {
-      this.successMessage = 'Não foi possivel Efetuar o cadastro';
-      return false;
-    } else if (this.provider && this.cellPhone.value === '' ) {
-      this.successMessage = 'Favor Preencher Telefone';
-      return false;
-    }
-    this._AuthService.Exists(this.email.value).subscribe(r => {
-      if (r != null) {
-        console.log(r);
-        localStorage.setItem('loggedUser', JSON.stringify(r));
-        localStorage.setItem('typeUser', "consumer");
-        this.successMessage = 'Ja exist esse Email';
-        return false;
-      }
-      else {
-         console.log(r);
-         return true;
+  checkIfEmailExists(): boolean {
+    let exists = false;
+    this._AuthService.checkIfConsumerEmailExists(this.email.value).subscribe(r => {
+      if (r) {
+        this.message = "Email já existente.";
       }
     })
-    return true;
+
+    return exists;
   }
 
   register() {
+    this.checkIfEmailExists();
     const payload = JSON.stringify({
       "firstName": this.firstName.value,
       "lastName": this.lastName.value,
@@ -84,22 +67,17 @@ export class RegisterComponent implements OnInit {
       "password": this.password.value,
       "cellPhone": this.cellPhone.value
     })
-
-  if (this.Validation()) {
-      if (!this.provider) {
-        this._AuthService.saveConsumer(payload).subscribe(r => {
-          this.cleanFields();
-          this.successMessage = "Sucesso! Estamos ansiosos para que você acesse nossa plataforma, dá um pulinho lá!";
-        })
-      }
-      else {
-        this._AuthService.saveProvider(payload).subscribe(r => {
-          this.cleanFields();
-
-          this.successMessage = "Parabéns! Temos orgulho de ter você em nosso time!";
-
-        })
-      }
+    if (!this.provider && !this.checkIfEmailExists()) {
+      this._AuthService.saveConsumer(payload).subscribe(r => {
+        this.cleanFields();
+        this.message = "Sucesso! Estamos ansiosos para que você acesse nossa plataforma, dá um pulinho lá!";
+      })
+    }
+    else {
+      this._AuthService.saveProvider(payload).subscribe(r => {
+        this.cleanFields();
+        this.message = "Parabéns! Temos orgulho de ter você em nosso time!";
+      })
     }
   }
 

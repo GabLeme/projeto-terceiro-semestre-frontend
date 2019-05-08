@@ -13,6 +13,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { loadingspinnercomponent } from './pages/loading-spinner/loading-spinner.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { FilterDivComponent } from './components/filter-div/filter-div.component';
+import { UtilitiesDivComponent } from './components/utilities-div/utilities-div.component';
+import { NgxCurrencyModule } from "ngx-currency";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +28,9 @@ import { loadingspinnercomponent } from './pages/loading-spinner/loading-spinner
     LoginComponent,
     RegisterComponent,
     loadingspinnercomponent,
+    UserProfileComponent,
+    FilterDivComponent,
+    UtilitiesDivComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,8 @@ import { loadingspinnercomponent } from './pages/loading-spinner/loading-spinner
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgxCurrencyModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

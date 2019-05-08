@@ -6,16 +6,19 @@
   <div class="row">
     <div class="col-md-3">
       <div class="text-center">
-        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+        <img [src]="consumerProfile['photo']" width="100px" class="avatar img-circle" alt="avatar">
         <h6>Alterar foto..</h6>
 
-        <input type="file" class="form-control">
+        <input type="file" class="form-control" (change)="transformImageToBase64($event, imagem)">
       </div>
 
       <br>
 
       <div class="text-center">
-
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitches" (change)="onSwitchChange()">
+          <label class="custom-control-label" for="customSwitches">Deseja alterar sua senha? </label>
+        </div>
       </div>
     </div>
 
@@ -40,34 +43,35 @@
             <input class="form-control" type="text" [value]="consumerProfile['email']" disabled>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Senha antiga:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="password" value="" [formControl]="password">
+        <div class="alterarSenha" *ngIf="changePass">
+          <div class="form-group">
+            <label class="col-md-3 control-label">Senha antiga:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="" [formControl]="password">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Nova senha:</label>
-          <div class="col-md-8">
-            <input class="form-control" type="password" value="" [formControl]="newPassword">
+          <div class="form-group">
+            <label class="col-md-3 control-label">Nova senha:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="" [formControl]="newPassword">
+            </div>
           </div>
+          <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-danger"
+            style="font-size: 10px" *ngIf="errorMessage">
+            {{errorMessage}}
+          </small>
+
+          <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-success"
+            style="font-size: 10px" *ngIf="successMessage">
+            {{successMessage}}
+          </small>
         </div>
-        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-danger"
-          style="font-size: 10px" *ngIf="errorMessage">
-          {{errorMessage}}
-        </small>
-
-        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4 text-success"
-          style="font-size: 10px" *ngIf="successMessage">
-          {{successMessage}}
-        </small>
-
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
             <input type="button" class="btn btn-primary" (click)="updateConsumer()" value="Salvar">
             <span></span>
-            <input type="reset" class="btn btn-default" value="Cancelar">
+            <input class="btn btn-default" value="Cancelar" routerLink="/home/services/cuidador">
           </div>
         </div>
       </form>
@@ -75,4 +79,5 @@
   </div>
 </div>
 <hr>
+<br>
 <app-footer></app-footer>

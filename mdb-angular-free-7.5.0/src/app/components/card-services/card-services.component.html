@@ -1,27 +1,119 @@
+<app-filter-div [category]="category" (messageEvent)="receiveMessage($event)"></app-filter-div>
+<app-utilities-div></app-utilities-div>
 <section class="team-section text-center my-5">
   <div class="cards">
-    <mdb-card *ngFor="let s of services"> 
+    <mdb-card *ngFor="let s of services">
       <mdb-card-body>
         <mdb-card-title>
-          <h4>  <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon>{{s.providerName}}</h4>
+          <h4>
+            <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon>{{s.providerName}}
+          </h4>
         </mdb-card-title>
 
-        <!--Text-->
         <mdb-card-text>
           {{s.description}}
         </mdb-card-text>
         <mdb-card-text>
-            Data de anuncio: {{s.announcementDate}}
-          </mdb-card-text>
+          Data de anuncio: {{s.announcementDate}}
+        </mdb-card-text>
         <!-- <p class="card-text"></p> -->
         <hr>
         <mdb-icon fas icon="envelope" class="d-inline p-2" [mdbTooltip]="s.providerEmail"></mdb-icon>
         <mdb-icon fas icon="phone" class="d-inline p-2" [mdbTooltip]="s.providerCellphone"></mdb-icon>
         <hr>
-       <mdb-card-text><mdb-icon fas icon="money-bill-alt"></mdb-icon> {{s.value | currency:'R$'}}</mdb-card-text> 
-       <p></p>
-       <button *ngIf="s.value != 0.00" mdbBtn type="button" color="primary" rounded="true" mdbWavesEffect>Prosseguir</button>
+        <mdb-card-text><strong>*Preço médio por hora*</strong></mdb-card-text>
+        <mdb-card-text>
+          <mdb-icon fas icon="money-bill-alt"></mdb-icon> {{s.value | currency:'R$'}}
+        </mdb-card-text>
+        <p></p>
+        <button *ngIf="s.value != 0.00" mdbBtn type="button" color="primary" rounded="true"
+          (click)="basicModal.show(); getInformationsAboutTheSelectedService(s)" mdbWavesEffect>Enviar Proposta</button>
       </mdb-card-body>
     </mdb-card>
   </div>
 </section>
+
+
+<!--Modal Propose-->
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <span>Proposta de serviço</span>
+      </div>
+      <div class="modal-body" *ngIf="informationAboutTheService">
+        <h6>Nome do prestador: <strong>{{informationAboutTheService['providerName']}}</strong></h6>
+        <h6>Email que será enviada a proposta: <p><strong>{{informationAboutTheService['providerEmail']}}</strong></p>
+        </h6>
+        <!-- <h6>Categoria do serviço: <strong>{{informationAboutTheService['category']}}</strong></h6> -->
+        <hr>
+        <h6 class="text-center my-5"><strong>Informações sobre a proposta</strong></h6>
+        <form>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <i class="fas fa-envelope prefix"></i>
+                  <input mdbInput type="email" class="form-control validate" id="email" [formControl]="myEmail"
+                    required>
+                  <mdb-error *ngIf="myEmail.invalid && (myEmail.dirty || myEmail.touched)">Preencha um e-mail valido.
+                  </mdb-error>
+                  <label for="email">Seu email:</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <mdb-icon far icon="calendar-alt"></mdb-icon>
+                  <input mdbInput type="date" id="dateOne" class="form-control" [formControl]="dateOne">
+                  <label for="dateOne">De:</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="md-form">
+                  <mdb-icon far icon="calendar-alt"></mdb-icon>
+                  <input mdbInput type="date" id="dateTwo" class="form-control" [formControl]="dateTwo">
+                  <label for="dateTwo">Até:</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <mdb-icon fas icon="hand-holding-usd"></mdb-icon>
+                  <input mdbInput type="text" class="form-control" id="dinheiro" currencyMask
+                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [formControl]="value">
+                  <label for="dinheiro">Valor:</label>
+                </div>
+              </div>
+            </div>
+            <label *ngIf="successMessage" style="color: green; font-size: 14px">Proposta enviada, o prestador entrará em contato pelo e-mail que foi passado neste formulário.</label>
+            <!-- OCULTEI PARA NÃO FICAR GRANDE O FORMULARIO -->
+            <!-- <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <mdb-icon fas icon="hand-holding-usd"></mdb-icon>
+                  <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
+                  <label for="dinheiro">Observações:</label>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="basicModal.hide(); successMessage = false; cleanFields()"
+          mdbWavesEffect>Fechar</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="createPropose()"
+          mdbWavesEffect>Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script> -->

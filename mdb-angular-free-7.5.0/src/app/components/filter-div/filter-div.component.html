@@ -1,0 +1,27 @@
+<footer class="page-footer font-small cyan darken-1">
+
+  <div class="footer-copyright text-center py-3">
+    <h6 style="color: white !important"><mdb-icon fas icon="filter"></mdb-icon><strong> Filtros</strong></h6>
+    <hr>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <label for="customRange2" style="color: white !important;">Serviço escolhido</label>
+          <p style="color: white !important"><strong>{{category.toUpperCase()}}</strong></p>
+        </div>
+        <div class="col-sm">
+          <label for="buscaPorPreco" style="color: white !important;">Preço de até  : {{inputPrice | currency:'R$'}}</label>
+          <input type="range" class="custom-range" min="0" max="10000" id="buscaPorPreco"
+            (change)="getValueFromSlider()">
+        </div>
+        <div class="col-sm">
+          <br>
+          <button class="btn btn-rounded btn-sm my-0" color="primary" style="color: white !important" type="submit" (click)="searchByFilter()">
+            <mdb-icon fas icon="search"> </mdb-icon> BUSCAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
