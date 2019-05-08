@@ -93,7 +93,6 @@ export class UserProfileComponent implements OnInit {
       this._AuthService.updateConsumer(payload).subscribe(r => {
         console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
         this.errorMessage = '';
-        this.successMessage = "Dados atualizados :)";
         localStorage.setItem('loggedUser', JSON.stringify(r));
         console.log(`****O QUE FOI RECEBIDO***** \n`)
         console.log(r)
