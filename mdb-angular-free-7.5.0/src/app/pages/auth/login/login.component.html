@@ -23,8 +23,8 @@
         <div>
           <!-- Remember me -->
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember"
-              (change)="checkIfIsProvider($event)">
+            <input type="checkbox" name="isProvider" class="custom-control-input" id="defaultLoginFormRemember"
+              [(ngModel)]="isProvider">
             <label class="custom-control-label" for="defaultLoginFormRemember">Prestador</label>
           </div>
         </div>

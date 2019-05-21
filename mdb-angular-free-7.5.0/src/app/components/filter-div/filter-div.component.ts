@@ -17,7 +17,7 @@ export class FilterDivComponent implements OnInit {
   constructor(private _ServicesService: ServicesService) { }
 
   ngOnInit() {
-    this.inputPrice = 5000;
+    this.inputPrice = 500;
   }
 
   getValueFromSlider() {

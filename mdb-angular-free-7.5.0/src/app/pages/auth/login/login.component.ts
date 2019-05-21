@@ -41,12 +41,14 @@ export class LoginComponent implements OnInit {
       })
     }
     else {
+      console.log(this.isProvider)
       this._AuthService.makeLoginOfProvider(this.email.value, this.password.value).subscribe(r => {
         this.showSpinner = true;
+        console.log(r)
         if (r != null) {
           localStorage.setItem('loggedUser', JSON.stringify(r));
           localStorage.setItem('typeUser', "provider");
-          this._Router.navigate(['/home/services/cuidador'])
+          this._Router.navigate(['/home/user/provider'])
         }
         else {
           this.showSpinner = false;
@@ -59,11 +61,11 @@ export class LoginComponent implements OnInit {
 
 
 
-  checkIfIsProvider(event): void {
-    if (event.checked) {
-      this.isProvider = true;
-      console.log('c,iquei')
-    }
-  }
+  // checkIfIsProvider(event): void {
+  //   if (event.checked) {
+  //     this.isProvider = true;
+  //     console.log('c,iquei')
+  //   }
+  // }
 
 }

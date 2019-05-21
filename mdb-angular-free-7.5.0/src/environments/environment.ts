@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  endpointLocal: 'http://localhost:8080/api'
+  endpointLocal: 'http://localhost:8080/api',
+  microservicos: {
+    email: 'https://sendgrid-email-ecare.herokuapp.com/api/email'
+  }
 };
 
 /*

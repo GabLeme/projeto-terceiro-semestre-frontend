@@ -17,6 +17,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { FilterDivComponent } from './components/filter-div/filter-div.component';
 import { UtilitiesDivComponent } from './components/utilities-div/utilities-div.component';
 import { NgxCurrencyModule } from "ngx-currency";
+import { HomeProviderComponent } from './pages/provider/home-provider/home-provider.component';
+import { ViewProposesComponent } from './components/view-proposes/view-proposes.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { NgxCurrencyModule } from "ngx-currency";
     loadingspinnercomponent,
     UserProfileComponent,
     FilterDivComponent,
-    UtilitiesDivComponent
+    UtilitiesDivComponent,
+    HomeProviderComponent,
+    ViewProposesComponent
   ],
   imports: [
     BrowserModule,

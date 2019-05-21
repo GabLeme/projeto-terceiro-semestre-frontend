@@ -1,0 +1,76 @@
+<div class="col col-example" style="border: 1px solid #eee">
+  <!-- Propostas -->
+  <section class="team-section text-center my-5">
+    <h4>
+      <mdb-icon fas icon="praying-hands"></mdb-icon><Strong> Propostas</Strong>
+    </h4>
+    <br>
+    <div class="cards">
+      <mdb-card *ngFor="let p of proposes">
+        <mdb-icon fas icon="trash" class="text-right text-danger" style="padding: 5px !important;"></mdb-icon>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h6>
+              <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon> {{p.senderEmail}}
+            </h6>
+          </mdb-card-title>
+          <p></p>
+          <button mdbBtn type="button" color="primary" rounded="true"
+            (click)="basicModal.show(); collectInfoAboutPropose(p)" mdbWavesEffect>Visualizar Proposta</button>
+        </mdb-card-body>
+      </mdb-card>
+
+    </div>
+  </section>
+</div>
+
+
+<!--Modal Propose-->
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide();">
+          <span aria-hidden="true">×</span>
+        </button>
+        <span>Proposta de serviço</span>
+      </div>
+      <div class="modal-body" *ngIf="proposeInfo">
+        <form>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['senderEmail']"
+                    disabled mdbInput>
+                  <small id="emailHelp2" class="form-text text-muted">Email do cliente.</small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="md-form">
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['value']"
+                    disabled mdbInput>
+                  <small id="emailHelp2" class="form-text text-muted">Valor oferecido.</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="md-form">
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['serviceDate']" disabled
+                    mdbInput>
+                  <small id="emailHelp2" class="form-text text-muted">Data.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
+          mdbWavesEffect>Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,11 +6,11 @@ import { environment } from '../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class ProposesService {
+export class EmailService {
 
     constructor(private _HttpClient: HttpClient) { }
 
-    private endopointApiLocalHost = environment.endpointLocal;
+    private endopointApiLocalHost = environment.microservicos.email;
 
     private httpOptions: any = {
         headers: new HttpHeaders({
@@ -22,13 +22,7 @@ export class ProposesService {
 
     };
 
-    createPropose(payload: any) {
-        return this._HttpClient.post(`${this.endopointApiLocalHost}/proposes`, payload, this.httpOptions);
+    sendProposeEmailToProvider(payload: any) {
+        return this._HttpClient.post(`${this.endopointApiLocalHost}`, payload, this.httpOptions);
     }
-
-    getProposeByReceiver(receiverEmail: string) {
-        return this._HttpClient.get(`${this.endopointApiLocalHost}/proposes/receiver?receiverEmail=${receiverEmail}`);
-    }
-
-
 }

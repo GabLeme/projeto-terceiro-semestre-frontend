@@ -5,6 +5,7 @@ import { FilterDivComponent } from '../filter-div/filter-div.component';
 import * as $ from 'jquery';
 import { ProposesService } from 'src/app/services/proposes.service';
 import { FormControl, Validators } from '@angular/forms';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-card-services',
@@ -13,7 +14,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class CardServicesComponent implements OnInit {
 
-  constructor(private _Services: ServicesService, private _ProposesService: ProposesService) { }
+  constructor(private _Services: ServicesService, private _ProposesService: ProposesService, private _EmailService: EmailService) { }
 
   @ViewChild(FilterDivComponent) filterDiv;
   @Input() category = ``;
@@ -59,9 +60,22 @@ export class CardServicesComponent implements OnInit {
       "value": parseFloat(this.value.value)
     })
 
+    let loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+
+    const payloadEmail = JSON.stringify({
+      "receiverEmail": this.informationAboutTheService['providerEmail'],
+      "senderEmail": this.myEmail.value,
+      "subject": "Proposta de serviço.",
+      "text": "abcs",
+      "date": "De: " + this.dateOne.value + ", Até: " + this.dateTwo.value,
+      "value": parseFloat(this.value.value),
+      "photo": "http://chittagongit.com/download/96696"
+    })
+
     this._ProposesService.createPropose(payload).subscribe(r => {
-      this.sendEmailToProvider(this.informationAboutTheService['providerEmail']);
-      this.successMessage = true;
+      this.sendEmailToProvider(payloadEmail);
+      console.log(payloadEmail)
     })
   }
 
@@ -72,8 +86,10 @@ export class CardServicesComponent implements OnInit {
     this.value.setValue('');
   }
 
-  sendEmailToProvider(providerEmail) {
-
+  sendEmailToProvider(payload) {
+    this._EmailService.sendProposeEmailToProvider(payload).subscribe(r => {
+      this.successMessage = true;
+    })
   }
 
 }
