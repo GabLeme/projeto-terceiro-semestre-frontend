@@ -1,0 +1,30 @@
+
+<form class="text-center border border-light p-5">
+
+  <p class="h4 mb-4">Serviço</p>
+
+  <label>Categoria do serviço</label>
+  <select class="browser-default custom-select mb-4" [formControl]="category" [value]="service.category">
+    <option value="" disabled>Categoria</option>
+    <option value="acompanhador" selected>Acompanhamento</option>
+    <option value="cuidador">Cuidador</option>
+    <option value="outros">Outros</option>
+  </select>
+
+
+  <label>Valor</label>
+  <input mdbInput type="text" class="form-control" id="dinheiro" currencyMask
+    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" [formControl]="value" [value]="service.value">
+
+  <br>
+
+  <div class="form-group">
+    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" [formControl]="description" [value]="service.description"
+      placeholder="Descrição"></textarea>
+  </div>
+
+
+
+  <button class="btn btn-info btn-block" type="submit" (click)="createOrUpdate()">Salvar</button>
+
+</form>

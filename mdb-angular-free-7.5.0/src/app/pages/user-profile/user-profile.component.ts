@@ -13,9 +13,9 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private _AuthService: AuthService) { }
 
-  private accessRole = new AccessRole();
+  typeUser;
 
-  consumerProfile: any;
+  profile: any;
   errorMessage: String;
   successMessage: String;
   changePass;
@@ -30,13 +30,13 @@ export class UserProfileComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.accessRole.verifyAccessRole(localStorage.getItem("typeUser"), "consumidor")) {
-      this.consumerProfile = JSON.parse(localStorage.getItem('loggedUser'));
-    }
+    this.typeUser = localStorage.getItem('typeUser');
+    this.profile = JSON.parse(localStorage.getItem('loggedUser'));
   }
 
+
   verifyIfPasswordMatch(): boolean {
-    if (this.password.value != this.consumerProfile['password']) {
+    if (this.password.value != this.profile['password']) {
       this.errorMessage = "Opa! senha errada, tente novamente.";
       return false;
     }
@@ -53,53 +53,105 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  updateConsumer() {
+  verifyTypeOfUser() {
+    return this.typeUser;
+  }
 
-    if (this.changePass) {
-      if (this.verifyIfPasswordMatch()) {
+  updateConsumer() {
+    if (this.verifyTypeOfUser() === 'consumer') {
+
+      if (this.changePass) {
+        if (this.verifyIfPasswordMatch()) {
+          let payload = JSON.stringify({
+            "_id": this.profile['_id'],
+            "firstName": this.profile['firstName'],
+            "lastName": this.profile['lastName'],
+            "email": this.profile['email'],
+            "password": this.newPassword.value,
+            "photo": this.profile['photo']
+          })
+
+          this._AuthService.updateConsumer(payload).subscribe(r => {
+            console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
+            this.errorMessage = '';
+            this.successMessage = "Dados atualizados :)";
+            localStorage.setItem('loggedUser', JSON.stringify(r));
+            console.log(`****O QUE FOI RECEBIDO***** \n`)
+            console.log(r)
+            this.profile = JSON.parse(localStorage.getItem('loggedUser'));
+          })
+        }
+        else {
+          this.errorMessage = 'Senha inválida.';
+        }
+      }
+      else {
         let payload = JSON.stringify({
-          "_id": this.consumerProfile['_id'],
-          "firstName": this.consumerProfile['firstName'],
-          "lastName": this.consumerProfile['lastName'],
-          "email": this.consumerProfile['email'],
-          "password": this.newPassword.value,
-          "photo": this.consumerProfile['photo']
+          "_id": this.profile['_id'],
+          "firstName": this.profile['firstName'],
+          "lastName": this.profile['lastName'],
+          "email": this.profile['email'],
+          "password": this.profile['password'],
+          "photo": this.newPhoto64
         })
 
         this._AuthService.updateConsumer(payload).subscribe(r => {
           console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
           this.errorMessage = '';
-          this.successMessage = "Dados atualizados :)";
           localStorage.setItem('loggedUser', JSON.stringify(r));
           console.log(`****O QUE FOI RECEBIDO***** \n`)
           console.log(r)
-          this.consumerProfile = JSON.parse(localStorage.getItem('loggedUser'));
+          this.profile = JSON.parse(localStorage.getItem('loggedUser'));
         })
       }
-      else {
-        this.errorMessage = 'Senha inválida.';
-      }
+
     }
     else {
-      let payload = JSON.stringify({
-        "_id": this.consumerProfile['_id'],
-        "firstName": this.consumerProfile['firstName'],
-        "lastName": this.consumerProfile['lastName'],
-        "email": this.consumerProfile['email'],
-        "password": this.consumerProfile['password'],
-        "photo": this.newPhoto64
-      })
+      if (this.changePass) {
+        if (this.verifyIfPasswordMatch()) {
+          let payload = JSON.stringify({
+            "_id": this.profile['_id'],
+            "firstName": this.profile['firstName'],
+            "lastName": this.profile['lastName'],
+            "email": this.profile['email'],
+            "password": this.newPassword.value,
+            "photo": this.profile['photo']
+          })
 
-      this._AuthService.updateConsumer(payload).subscribe(r => {
-        console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
-        this.errorMessage = '';
-        localStorage.setItem('loggedUser', JSON.stringify(r));
-        console.log(`****O QUE FOI RECEBIDO***** \n`)
-        console.log(r)
-        this.consumerProfile = JSON.parse(localStorage.getItem('loggedUser'));
-      })
+          this._AuthService.updateProvider(payload).subscribe(r => {
+            console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
+            this.errorMessage = '';
+            this.successMessage = "Dados atualizados :)";
+            localStorage.setItem('loggedUser', JSON.stringify(r));
+            console.log(`****O QUE FOI RECEBIDO***** \n`)
+            console.log(r)
+            this.profile = JSON.parse(localStorage.getItem('loggedUser'));
+          })
+        }
+        else {
+          this.errorMessage = 'Senha inválida.';
+        }
+      }
+      else {
+        let payload = JSON.stringify({
+          "_id": this.profile['_id'],
+          "firstName": this.profile['firstName'],
+          "lastName": this.profile['lastName'],
+          "email": this.profile['email'],
+          "password": this.profile['password'],
+          "photo": this.newPhoto64
+        })
+
+        this._AuthService.updateProvider(payload).subscribe(r => {
+          console.log(`****O QUE FOI ENVIADO***** \n ${payload}`)
+          this.errorMessage = '';
+          localStorage.setItem('loggedUser', JSON.stringify(r));
+          console.log(`****O QUE FOI RECEBIDO***** \n`)
+          console.log(r)
+          this.profile = JSON.parse(localStorage.getItem('loggedUser'));
+        })
+      }
     }
-
   }
 
   transformImageToBase64(readerEvt, midia) {

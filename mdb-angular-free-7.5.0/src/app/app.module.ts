@@ -19,6 +19,7 @@ import { UtilitiesDivComponent } from './components/utilities-div/utilities-div.
 import { NgxCurrencyModule } from "ngx-currency";
 import { HomeProviderComponent } from './pages/provider/home-provider/home-provider.component';
 import { ViewProposesComponent } from './components/view-proposes/view-proposes.component';
+import { CreateServicesOrUpdateComponent } from './components/create-services-or-update/create-services-or-update.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ViewProposesComponent } from './components/view-proposes/view-proposes.
     FilterDivComponent,
     UtilitiesDivComponent,
     HomeProviderComponent,
-    ViewProposesComponent
+    ViewProposesComponent, 
+    CreateServicesOrUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { ViewProposesComponent } from './components/view-proposes/view-proposes.
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgxCurrencyModule 
+    NgxCurrencyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -30,5 +30,9 @@ export class ProposesService {
         return this._HttpClient.get(`${this.endopointApiLocalHost}/proposes/receiver?receiverEmail=${receiverEmail}`);
     }
 
+    getProposeById(id: string){
+        return this._HttpClient.get(`${this.endopointApiLocalHost}/proposes/${id}`);      
+    }
+
 
 }

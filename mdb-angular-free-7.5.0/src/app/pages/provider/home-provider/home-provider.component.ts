@@ -9,7 +9,9 @@ export class HomeProviderComponent implements OnInit {
 
   constructor() { }
 
+  profile: String;
   ngOnInit() {
+    this.profile = JSON.parse(localStorage.getItem('loggedUser'));
   }
 
 }

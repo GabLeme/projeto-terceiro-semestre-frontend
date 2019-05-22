@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { HomeProviderComponent } from './pages/provider/home-provider/home-provider.component';
+import { CreateServicesOrUpdateComponent } from './components/create-services-or-update/create-services-or-update.component';
 
 const routes: Routes = [
   { path: 'home/services/:category', component: ServicesPageComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home/user/profile/:typeOfUser', component: UserProfileComponent },
   { path: 'home/user/provider', component: HomeProviderComponent },
+  { path: 'service/createOrUpdate', component: CreateServicesOrUpdateComponent },
 ];
 
 @NgModule({

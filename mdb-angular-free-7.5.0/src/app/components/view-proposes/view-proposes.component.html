@@ -1,25 +1,78 @@
 <div class="col col-example" style="border: 1px solid #eee">
+  <p></p>
+  <span *ngIf="!createService" class="text-primary d-inline p-2" style="cursor: pointer !important" (click)="updateService()">Atualizar serviço</span>
+  <span class="text-primary d-inline p-2" style="cursor: pointer !important" (click)="update = false" *ngIf="update">Voltar</span>
+  
   <!-- Propostas -->
   <section class="team-section text-center my-5">
     <h4>
       <mdb-icon fas icon="praying-hands"></mdb-icon><Strong> Propostas</Strong>
     </h4>
     <br>
-    <div class="cards">
-      <mdb-card *ngFor="let p of proposes">
-        <mdb-icon fas icon="trash" class="text-right text-danger" style="padding: 5px !important;"></mdb-icon>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h6>
-              <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon> {{p.senderEmail}}
-            </h6>
-          </mdb-card-title>
-          <p></p>
-          <button mdbBtn type="button" color="primary" rounded="true"
-            (click)="basicModal.show(); collectInfoAboutPropose(p)" mdbWavesEffect>Visualizar Proposta</button>
-        </mdb-card-body>
-      </mdb-card>
 
+    <div class="container" *ngIf="update">
+      <div class="row">
+        <div class="col-sm">
+          <app-create-services-or-update typeOfOperation="update" [service]="service[0]">
+          </app-create-services-or-update>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" *ngIf="!update">
+
+      <!-- Se existir serviço e não existir proposta -->
+      <div class="container" *ngIf="emptyProposes && !createService">
+        <div class="row">
+          <div class="col-sm">
+            <mdb-icon fas icon="wind" size="3x"></mdb-icon>
+            <p></p>
+            <h3>Opa! Parece que está meio vazio por aqui, você ainda não recebeu nenhuma proposta.</h3>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Se não existir serviço e não existir proposta -->
+      <div class="container" *ngIf="!emptyProposes && createService && !varShowCreate">
+        <div class="row">
+          <div class="col-sm">
+            <h4>Você ainda não criou um serviço!</h4>
+            <p></p>
+            <button mdbBtn type="button" color="primary" rounded="true" (click)="showCreate()" mdbWavesEffect>Criar
+              serviço</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Criar serviço -->
+      <div class="container" *ngIf="varShowCreate">
+        <div class="row">
+          <div class="col-sm">
+            <app-create-services-or-update typeOfOperation="create" (messageEvent)="receiveMessage($event)">
+            </app-create-services-or-update>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Se existir serviço e existir proposta -->
+      <div class="cards" *ngIf="!createService && !emptyProposes">
+        <mdb-card *ngFor="let p of proposes">
+          <mdb-icon fas icon="trash" class="text-right text-danger" style="padding: 5px !important;"></mdb-icon>
+          <mdb-card-body>
+            <mdb-card-title>
+              <h6>
+                <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon> {{p.senderEmail}}
+              </h6>
+            </mdb-card-title>
+            <p></p>
+            <button mdbBtn type="button" color="primary" rounded="true"
+              (click)="basicModal.show(); collectInfoAboutPropose(p)" mdbWavesEffect>Visualizar Proposta</button>
+          </mdb-card-body>
+        </mdb-card>
+
+      </div>
     </div>
   </section>
 </div>
@@ -49,8 +102,8 @@
               </div>
               <div class="col">
                 <div class="md-form">
-                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['value']"
-                    disabled mdbInput>
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['value']" disabled
+                    mdbInput>
                   <small id="emailHelp2" class="form-text text-muted">Valor oferecido.</small>
                 </div>
               </div>
@@ -58,8 +111,8 @@
             <div class="row">
               <div class="col">
                 <div class="md-form">
-                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['serviceDate']" disabled
-                    mdbInput>
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['serviceDate']"
+                    disabled mdbInput>
                   <small id="emailHelp2" class="form-text text-muted">Data.</small>
                 </div>
               </div>

@@ -45,4 +45,8 @@ export class AuthService {
     updateConsumer(payload: any) {
         return this._HttpClient.post(`${this.endopointApiLocalHost}/consumers/`, payload, this.httpOptions);
     }
+
+    updateProvider(payload: any) {
+        return this._HttpClient.post(`${this.endopointApiLocalHost}/providers/`, payload, this.httpOptions);
+    }
 }

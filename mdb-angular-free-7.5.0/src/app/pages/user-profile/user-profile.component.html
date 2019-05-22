@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-3">
       <div class="text-center">
-        <img [src]="consumerProfile['photo']" width="100px" class="avatar img-circle" alt="avatar">
+        <img [src]="profile['photo']" width="100px" class="avatar img-circle" alt="avatar">
         <h6>Alterar foto..</h6>
 
         <input type="file" class="form-control" (change)="transformImageToBase64($event, imagem)">
@@ -28,19 +28,19 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Primeiro nome:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" [value]="consumerProfile['firstName']" disabled>
+            <input class="form-control" type="text" [value]="profile['firstName']" disabled>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Ultimo nome:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" [value]="consumerProfile['lastName']" disabled>
+            <input class="form-control" type="text" [value]="profile['lastName']" disabled>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" [value]="consumerProfile['email']" disabled>
+            <input class="form-control" type="text" [value]="profile['email']" disabled>
           </div>
         </div>
         <div class="alterarSenha" *ngIf="changePass">
