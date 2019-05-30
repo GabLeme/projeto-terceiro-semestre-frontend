@@ -33,4 +33,4 @@ export class FilterDivComponent implements OnInit {
     this.messageEvent.emit(message);
   }
 
-}
+  }

@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import { ProposesService } from 'src/app/services/proposes.service';
 import { FormControl, Validators } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
+import { UtilitiesDivComponent } from '../utilities-div/utilities-div.component';
 
 @Component({
   selector: 'app-card-services',
@@ -17,9 +18,11 @@ export class CardServicesComponent implements OnInit {
   constructor(private _Services: ServicesService, private _ProposesService: ProposesService, private _EmailService: EmailService) { }
 
   @ViewChild(FilterDivComponent) filterDiv;
+  @ViewChild(UtilitiesDivComponent) utDiv;
+
   @Input() category = ``;
   informationAboutTheService: any;
-  services;
+  services = [];
 
   //Form
   myEmail = new FormControl(null, [Validators.required, Validators.email]);
@@ -27,24 +30,36 @@ export class CardServicesComponent implements OnInit {
   dateTwo = new FormControl('');
   value = new FormControl('');
   successMessage;
-
+  userEmail;
 
 
   ngOnInit() {
     if (this.category != '')
       this.getByCategory();
+    this.userEmail = JSON.parse(localStorage.getItem('loggedUser'));
+    this.myEmail.setValue(this.userEmail['email'])
   }
 
   receiveMessage($event) {
-    this.services = $event;
+    this.services.length = 0;
+    setTimeout(() => {
+      this.services = $event;
+    }, 1000);
+  }
+
+  receiveRecommendation($event) {
+    this.services.length = 0;
+    setTimeout(() => {
+      this.services = $event;
+    }, 1000);
   }
 
   getAll(): void {
-    this._Services.findAll().subscribe(r => this.services = r);
+    this._Services.findAll().subscribe(r => { this.services = r; });
   }
 
   getByCategory() {
-    this._Services.findByCategory(this.category).subscribe(r => { this.services = r; console.log(r) });
+    this._Services.findByCategory(this.category).subscribe(r => { this.services = r; console.log(r); });
   }
 
   getInformationsAboutTheSelectedService(service) {

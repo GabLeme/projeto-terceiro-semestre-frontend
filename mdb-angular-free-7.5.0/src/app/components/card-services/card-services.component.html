@@ -1,11 +1,16 @@
 <app-filter-div [category]="category" (messageEvent)="receiveMessage($event)"></app-filter-div>
-<app-utilities-div></app-utilities-div>
+<app-utilities-div (recServices)="receiveRecommendation($event)"></app-utilities-div>
 <section class="team-section text-center my-5">
-  <div class="cards">
+
+  <div class="spinner-border text-primary" role="status" *ngIf="services.length === 0">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div class="cards" *ngIf="services.length != 0">
     <mdb-card *ngFor="let s of services">
       <mdb-card-body>
         <mdb-card-title>
-          <h4>
+          <h4 style="font-size: 14px">
             <mdb-icon fas icon="user-circle" class="d-inline p-2"></mdb-icon>{{s.providerName}}
           </h4>
         </mdb-card-title>
@@ -14,13 +19,14 @@
           {{s.description}}
         </mdb-card-text>
         <mdb-card-text>
-          Data de anuncio: {{s.announcementDate}}
+          Data de anuncio: {{s.announcementDate.split('T')[0]}}
         </mdb-card-text>
         <!-- <p class="card-text"></p> -->
         <hr>
         <mdb-icon fas icon="envelope" class="d-inline p-2" [mdbTooltip]="s.providerEmail"></mdb-icon>
         <mdb-icon fas icon="phone" class="d-inline p-2" [mdbTooltip]="s.providerCellphone"></mdb-icon>
         <hr>
+        <star-rating [value]="s.value / 100" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="true"></star-rating>
         <mdb-card-text><strong>*Preço médio por hora*</strong></mdb-card-text>
         <mdb-card-text>
           <mdb-icon fas icon="money-bill-alt"></mdb-icon> {{s.value | currency:'R$'}}
@@ -58,10 +64,8 @@
               <div class="col">
                 <div class="md-form">
                   <i class="fas fa-envelope prefix"></i>
-                  <input mdbInput type="email" class="form-control validate" id="email" [formControl]="myEmail"
-                    required>
-                  <mdb-error *ngIf="myEmail.invalid && (myEmail.dirty || myEmail.touched)">Preencha um e-mail valido.
-                  </mdb-error>
+                  <input mdbInput type="email" class="form-control validate" id="email" disabled
+                    [value]="userEmail['email']" required disabled>
                   <label for="email">Seu email:</label>
                 </div>
               </div>
@@ -92,7 +96,8 @@
                 </div>
               </div>
             </div>
-            <label *ngIf="successMessage" style="color: green; font-size: 14px">Proposta enviada, o prestador entrará em contato pelo e-mail que foi passado neste formulário.</label>
+            <label *ngIf="successMessage" style="color: green; font-size: 14px">Proposta enviada, o prestador entrará em
+              contato pelo e-mail que foi passado neste formulário.</label>
             <!-- OCULTEI PARA NÃO FICAR GRANDE O FORMULARIO -->
             <!-- <div class="row">
               <div class="col">
@@ -107,8 +112,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="basicModal.hide(); successMessage = false; cleanFields()"
-          mdbWavesEffect>Fechar</button>
+        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+          (click)="basicModal.hide(); successMessage = false; cleanFields()" mdbWavesEffect>Fechar</button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="createPropose()"
           mdbWavesEffect>Enviar</button>
       </div>

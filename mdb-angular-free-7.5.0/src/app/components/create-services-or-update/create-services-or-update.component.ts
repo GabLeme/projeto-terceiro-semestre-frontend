@@ -38,12 +38,49 @@ export class CreateServicesOrUpdateComponent implements OnInit {
         "value": this.value.value,
         "totalStars": 0
       })
-      this._ServicesService.createService(payload).subscribe(r => {
+      this._ServicesService.createOrUpdate(payload).subscribe(r => {
         this.messageEvent.emit("created");
       })
     }
     else if (this.typeOfOperation === 'update') {
       //update
+
+      let payload = '';
+
+      if (this.category.value === "" || this.description.value === "" || this.value.value === "") {
+        payload = JSON.stringify({
+          "_id": this.service._id,
+          "description": this.service.description,
+          "category": this.service.category,
+          "providerName": this.profile['email'],
+          "providerEmail": this.profile['email'],
+          "providerCellphone": this.profile['cellPhone'],
+          "announcementDate": new Date(),
+          "value": this.service.value,
+          "totalStars": 0
+        })
+        
+      }
+      else {
+
+        payload = JSON.stringify({
+          "_id": this.service._id,
+          "description": this.description.value,
+          "category": this.category.value,
+          "providerName": this.profile['email'],
+          "providerEmail": this.profile['email'],
+          "providerCellphone": this.profile['cellPhone'],
+          "announcementDate": new Date(),
+          "value": this.value.value,
+          "totalStars": 0
+        })
+      }
+
+      this._ServicesService.createOrUpdate(payload).subscribe(r => {
+        this.messageEvent.emit("update");
+      })
+
+
     }
 
   }

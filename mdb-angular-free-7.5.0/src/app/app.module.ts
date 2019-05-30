@@ -20,7 +20,8 @@ import { NgxCurrencyModule } from "ngx-currency";
 import { HomeProviderComponent } from './pages/provider/home-provider/home-provider.component';
 import { ViewProposesComponent } from './components/view-proposes/view-proposes.component';
 import { CreateServicesOrUpdateComponent } from './components/create-services-or-update/create-services-or-update.component';
-
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { RatingModule } from 'ng-starrating';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,9 @@ import { CreateServicesOrUpdateComponent } from './components/create-services-or
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    LoadingBarHttpClientModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

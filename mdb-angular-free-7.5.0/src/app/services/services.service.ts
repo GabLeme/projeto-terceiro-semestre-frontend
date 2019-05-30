@@ -42,7 +42,7 @@ export class ServicesService {
     return this._HttpClient.get(`${this.endopointApiLocalHost}/services/filter/list?providerName=${name}`);
   }
 
-  createService(payload: any) {
+  createOrUpdate(payload: any) {
     return this._HttpClient.post(`${this.endopointApiLocalHost}/services`, payload, this.httpOptions);
   }
 }

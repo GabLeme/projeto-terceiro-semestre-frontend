@@ -1,16 +1,19 @@
 <app-header></app-header>
 <section>
   <div class="footer-copyright text-center py-3">
-    <div class="avatar mx-auto white" *ngIf="profile['photo']"><img [src]="profile['photo']" alt="avatar mx-auto white" width="300px"
-        class="rounded-circle img-fluid">
+    <div class="avatar mx-auto white" *ngIf="profile['photo']"><img [src]="profile['photo']" alt="avatar mx-auto white"
+        width="300px" class="rounded-circle img-fluid">
     </div>
-    <div class="avatar mx-auto white" *ngIf="!profile['photo']"><img src="https://wiki.bravofleet.com/images/4/43/No-avatar.png" alt="avatar mx-auto white" width="300px"
+    <div class="avatar mx-auto white" *ngIf="!profile['photo']"><img
+        src="https://wiki.bravofleet.com/images/4/43/No-avatar.png" alt="avatar mx-auto white" width="300px"
         class="rounded-circle img-fluid">
     </div>
 
     <hr>
     <h6><strong>{{profile['email'].toUpperCase()}}</strong></h6>
-    <h6>Avaliação: Finge que aqui tem 6 estrelas</h6>
+    <h6>Avaliação: <star-rating [value]="fakeStar" checkedcolor="red" uncheckedcolor="black" size="24px"
+        readonly="true"></star-rating>
+    </h6>
     <hr>
     <app-view-proposes></app-view-proposes>
   </div>

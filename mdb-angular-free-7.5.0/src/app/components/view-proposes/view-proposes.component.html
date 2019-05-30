@@ -59,7 +59,6 @@
       <!-- Se existir serviço e existir proposta -->
       <div class="cards" *ngIf="!createService && !emptyProposes">
         <mdb-card *ngFor="let p of proposes">
-          <mdb-icon fas icon="trash" class="text-right text-danger" style="padding: 5px !important;"></mdb-icon>
           <mdb-card-body>
             <mdb-card-title>
               <h6>
@@ -102,7 +101,7 @@
               </div>
               <div class="col">
                 <div class="md-form">
-                  <input type="text" id="inputIconEx1" class="form-control" [value]="proposeInfo['value']" disabled
+                  <input type="text" id="inputIconEx1" class="form-control" [value]="'R$' + ' ' + proposeInfo['value']" disabled
                     mdbInput>
                   <small id="emailHelp2" class="form-text text-muted">Valor oferecido.</small>
                 </div>

@@ -29,7 +29,7 @@ export class ViewProposesComponent implements OnInit {
   getByReceiver() {
     let receiverEmail = JSON.parse(localStorage.getItem('loggedUser'));
 
-    this._ProposesService.getProposeByReceiver(receiverEmail['email']).subscribe(r => { this.proposes = r; console.log(r) });
+    this._ProposesService.getProposeByReceiver(receiverEmail['email']).subscribe(r => { this.proposes = r; console.log(r)});
   }
 
   collectInfoAboutPropose(propose) {
@@ -64,14 +64,11 @@ export class ViewProposesComponent implements OnInit {
           else {
             this.emptyProposes = false;
             this.createService = false;
+            this.getByReceiver();
           }
         })
       }
 
-
-      console.log(this.createService)
-      console.log(this.emptyProposes)
-      console.log(this.varShowCreate)
 
     })
 
